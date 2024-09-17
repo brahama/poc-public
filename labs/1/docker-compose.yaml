@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nmap:
+    image: instrumentisto/nmap:latest
+    depends_on:
+      - apache
+    command: -A -T4 apache
+
+
+  apache:
+    image: httpd:2.4.56
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ../../targets/apache-webapp/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ../../targets/apache-webapp/htdocs/index.html:/usr/local/apache2/htdocs/index.html
+      - ./logs:/usr/local/apache2/logs
+
