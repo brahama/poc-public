@@ -5,7 +5,7 @@ services:
     image: instrumentisto/nmap:latest
     depends_on:
       - apache
-    command: -A -T4 apache
+    command: -A -T4 ${TG_TARGET:-apache}
 
 
   apache:
